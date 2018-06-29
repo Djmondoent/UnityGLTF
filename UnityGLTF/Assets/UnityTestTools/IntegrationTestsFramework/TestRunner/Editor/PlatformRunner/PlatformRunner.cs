@@ -90,7 +90,11 @@ namespace UnityTest.IntegrationTests
 
 			AssetDatabase.Refresh();
 
+#if UNITY_2018
+			if (result.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded)
+#else
 			if (!string.IsNullOrEmpty(result))
+#endif
 			{
 				if (InternalEditorUtility.inBatchMode)
 					EditorApplication.Exit(Batch.returnCodeRunError);
